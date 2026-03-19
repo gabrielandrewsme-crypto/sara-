@@ -1,0 +1,12 @@
+.next
+node_modules
+.env
+.env.local
+drizzle
+.agent
+backend
+.next
+node_modules
+dist
+.env
+.env.local

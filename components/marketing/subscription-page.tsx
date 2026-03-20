@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { env } from "@/lib/config/env";
 import { PageShell } from "./page-shell";
 
 const planBenefits = [
@@ -9,6 +10,9 @@ const planBenefits = [
 ];
 
 export function SubscriptionPage() {
+  const checkoutUrl = env.CAKTO_CHECKOUT_URL || env.APP_URL;
+  const hasCheckoutUrl = Boolean(env.CAKTO_CHECKOUT_URL);
+
   return (
     <PageShell current="assinatura">
       <section className="split-layout">
@@ -46,13 +50,18 @@ export function SubscriptionPage() {
             <input type="text" placeholder="Digite seu cupom" />
           </label>
           <a
-            href="https://cakto.com"
+            href={checkoutUrl}
             target="_blank"
-            rel="noreferrer"
+            rel={hasCheckoutUrl ? "noreferrer" : undefined}
             className="button button--primary button--full"
           >
-            Ir para checkout da Cakto
+            {hasCheckoutUrl ? "Ir para checkout da Cakto" : "Configurar checkout da Cakto"}
           </a>
+          {!hasCheckoutUrl ? (
+            <p>
+              Defina <code>CAKTO_CHECKOUT_URL</code> no ambiente para apontar para o checkout real.
+            </p>
+          ) : null}
           <Button href="/pos-compra" variant="ghost">
             Ver fluxo pós-compra
           </Button>

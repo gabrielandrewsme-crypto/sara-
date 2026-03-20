@@ -14,6 +14,7 @@ const envSchema = z.object({
   AUTH_COOKIE_NAME: z.string().default("sara_session"),
   CAKTO_WEBHOOK_SECRET: z.string().optional(),
   CAKTO_PRODUCT_ID: z.string().optional(),
+  CAKTO_CHECKOUT_URL: z.string().optional(),
   EVOLUTION_API_URL: z.string().optional(),
   EVOLUTION_API_KEY: z.string().optional(),
   EVOLUTION_INSTANCE: z.string().optional(),
@@ -42,4 +43,8 @@ if (!parsed.success) {
 
 export const env = parsed.data;
 
-export const isMockBackend = env.MOCK_BACKEND || !env.DATABASE_URL;
+const hasRealDatabaseUrl =
+  Boolean(env.DATABASE_URL) &&
+  !env.DATABASE_URL?.includes("SEU_VALOR_REAL_DA_NEON");
+
+export const isMockBackend = env.MOCK_BACKEND || !hasRealDatabaseUrl;

@@ -5,6 +5,7 @@ import { BrandLogo } from "@/components/brand/brand-logo";
 type ProductShellProps = {
   current:
     | "dashboard"
+    | "tarefas"
     | "minha-conta"
     | "rotina"
     | "lembretes"
@@ -20,6 +21,7 @@ type ProductShellProps = {
 
 const navItems = [
   { key: "dashboard", href: "/painel", label: "Dashboard", icon: "DG" },
+  { key: "tarefas", href: "/painel/tarefas", label: "Tarefas", icon: "TF" },
   { key: "minha-conta", href: "/painel/minha-conta", label: "Minha Conta", icon: "MC" },
   { key: "rotina", href: "/painel/rotina", label: "Rotina", icon: "RT" },
   { key: "lembretes", href: "/painel/lembretes", label: "Lembretes", icon: "LE" },

@@ -15,6 +15,10 @@ export function getDb() {
     throw new Error("DATABASE_URL is missing. Add your Neon connection string in .env.local.");
   }
 
+  if (env.DATABASE_URL.includes("SEU_VALOR_REAL_DA_NEON")) {
+    throw new Error("DATABASE_URL still uses the placeholder value. Replace it with your real Neon connection string in .env.local.");
+  }
+
   if (!dbInstance) {
     const client = neon(env.DATABASE_URL!);
     dbInstance = drizzle(client, { schema });

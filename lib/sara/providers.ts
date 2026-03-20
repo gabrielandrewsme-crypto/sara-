@@ -13,6 +13,10 @@ export type WhatsAppProviderAdapter = {
   } | null;
 };
 
+type NormalizedInboundMessage = NonNullable<
+  ReturnType<WhatsAppProviderAdapter["normalizeInbound"]>
+>;
+
 export const evolutionProvider: WhatsAppProviderAdapter = {
   provider: "evolution",
   normalizeInbound(payload) {
@@ -40,11 +44,11 @@ export const evolutionProvider: WhatsAppProviderAdapter = {
     const phoneNumber = remoteJid.split("@")[0] ?? "";
     const audio = typed.data?.message?.audioMessage;
 
-    const normalized = {
+    const normalized: NormalizedInboundMessage = {
       providerMessageId,
       phoneNumber,
       body: typed.data?.message?.conversation ?? "[audio]",
-      messageType: (audio ? "audio" : "text") as const,
+      messageType: audio ? "audio" : "text",
       audioUrl: audio?.url,
       audioDurationSeconds: audio?.seconds,
       rawPayload: payload

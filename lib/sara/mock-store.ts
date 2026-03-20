@@ -153,7 +153,6 @@ function createInitialState(): MockState {
 }
 
 declare global {
-  // eslint-disable-next-line no-var
   var __saraMockState: MockState | undefined;
 }
 

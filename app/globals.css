@@ -1405,3 +1405,139 @@ p {
     align-items: flex-start;
   }
 }
+
+.product-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 20px;
+  align-items: start;
+}
+
+.chat-dock {
+  position: sticky;
+  top: 24px;
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(18, 20, 43, 0.78);
+  backdrop-filter: blur(18px);
+}
+
+.chat-dock--expanded {
+  position: static;
+  max-width: 100%;
+  min-height: 620px;
+}
+
+.chat-dock__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.chat-status {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(126, 244, 189, 0.12);
+  color: #b7ffd9;
+  font-size: 0.84rem;
+}
+
+.chat-dock__body {
+  display: grid;
+  gap: 16px;
+}
+
+.chat-thread {
+  display: grid;
+  gap: 12px;
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.chat-bubble--assistant {
+  justify-self: start;
+}
+
+.chat-bubble--user {
+  justify-self: end;
+  background: linear-gradient(135deg, rgba(126, 135, 255, 0.22), rgba(194, 108, 255, 0.22));
+}
+
+.chat-bubble strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.84rem;
+}
+
+.chat-bubble p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.chat-actions,
+.chat-prompts {
+  display: grid;
+  gap: 10px;
+}
+
+.chat-action-card,
+.chat-prompt {
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.chat-action-card strong {
+  display: block;
+  margin-bottom: 6px;
+  text-transform: capitalize;
+}
+
+.chat-prompt {
+  color: var(--text);
+  text-align: left;
+}
+
+.chat-dock__composer {
+  display: grid;
+  gap: 10px;
+}
+
+.chat-dock__composer textarea {
+  width: 100%;
+  min-height: 96px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  resize: vertical;
+}
+
+.chat-error {
+  color: #ffb4b4;
+}
+
+.soft-badge--high {
+  background: rgba(243, 111, 111, 0.16);
+}
+
+.soft-badge--normal {
+  background: rgba(242, 197, 107, 0.18);
+}
+
+.soft-badge--low {
+  background: rgba(126, 206, 182, 0.16);
+}
+
+@media (max-width: 1100px) {
+  .product-workspace {
+    grid-template-columns: 1fr;
+  }
+}

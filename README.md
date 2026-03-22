@@ -1,6 +1,6 @@
 # Sara
 
-Base Next.js para o sistema Sara, com site, login por email, painel protegido, schema relacional e fluxo inicial de ingestao via WhatsApp.
+Base Next.js para o sistema Sara, com site, login por email, painel protegido, banco relacional e chat nativo integrado ao painel.
 
 ## Stack
 
@@ -8,9 +8,8 @@ Base Next.js para o sistema Sara, com site, login por email, painel protegido, s
 - Neon/Postgres via Drizzle
 - Auth por codigo de email
 - Webhook de assinatura Cakto
-- WhatsApp via Evolution em camada adaptadora
-- Object storage e transcricao em adapters separados
-- Dashboard com refresh automatico leve
+- Chat nativo persistido em banco
+- Painel com refresh automatico leve
 
 ## Fluxo principal
 
@@ -18,8 +17,9 @@ Base Next.js para o sistema Sara, com site, login por email, painel protegido, s
 2. Compra na Cakto.
 3. Webhook ativa conta e assinatura.
 4. Usuario pede codigo de acesso por email.
-5. Painel abre e exige vinculo do WhatsApp.
-6. Mensagens entram pelo WhatsApp, sao classificadas e alimentam o painel.
+5. Painel abre e ja oferece o chat da Sara.
+6. O usuario conversa no chat para criar, editar, consultar e reorganizar itens reais do sistema.
+7. O painel reflete tudo em tarefas, lembretes, listas, agenda, rotina, notas e ideias.
 
 ## Rodando localmente
 

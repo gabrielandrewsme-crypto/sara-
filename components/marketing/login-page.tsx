@@ -12,7 +12,7 @@ export function LoginPage() {
           <p>Uma entrada simples, acolhedora e coerente com a identidade visual da Sara.</p>
           <div className="quote-card">
             <p>"Memoria nao e lugar de tarefa."</p>
-            <span>Use seu email para acessar o painel e concluir a vinculacao do WhatsApp.</span>
+            <span>Use seu email para acessar o painel e organizar tudo pelo chat da Sara.</span>
           </div>
         </div>
 

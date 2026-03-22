@@ -3,10 +3,10 @@ import { env } from "@/lib/config/env";
 import { PageShell } from "./page-shell";
 
 const planBenefits = [
-  "Organização de tarefas, lembretes, rotina, agenda, finanças, notas e ideias",
-  "Acesso via WhatsApp com experiência desenhada para baixa fricção",
+  "Organizacao de tarefas, lembretes, rotina, agenda, financas, notas e ideias",
+  "Chat nativo com experiencia desenhada para baixa friccao",
   "Painel visual para acompanhar o que foi capturado e estruturado",
-  "Base pronta para evoluir com mais automações e camadas de inteligência"
+  "Base pronta para evoluir com mais automacoes e camadas de inteligencia"
 ];
 
 export function SubscriptionPage() {
@@ -18,10 +18,10 @@ export function SubscriptionPage() {
       <section className="split-layout">
         <div className="split-layout__intro">
           <span className="eyebrow">Assinatura Sara</span>
-          <h1>Um plano simples para tirar o peso da sua cabeça</h1>
+          <h1>Um plano simples para tirar o peso da sua cabeca</h1>
           <p>
             A assinatura inicial concentra tudo em um plano mensal claro, com foco em
-            aderência, leveza e confiança na rotina.
+            aderencia, leveza e confianca na rotina.
           </p>
           <div className="benefits-list">
             {planBenefits.map((benefit) => (
@@ -39,11 +39,11 @@ export function SubscriptionPage() {
           <div className="pricing-card__price">
             <small>R$</small>
             <strong>49,90</strong>
-            <span>/mês</span>
+            <span>/mes</span>
           </div>
           <p>
-            Sem complexidade. Uma assinatura para começar a organizar sua vida mental
-            com constância.
+            Sem complexidade. Uma assinatura para comecar a organizar sua vida mental
+            com constancia.
           </p>
           <label className="input-group">
             <span>Cupom</span>
@@ -63,7 +63,7 @@ export function SubscriptionPage() {
             </p>
           ) : null}
           <Button href="/pos-compra" variant="ghost">
-            Ver fluxo pós-compra
+            Ver fluxo pos-compra
           </Button>
         </aside>
       </section>

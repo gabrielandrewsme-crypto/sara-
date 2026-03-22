@@ -11,39 +11,39 @@ export function DashboardPage({ data }: DashboardPageProps) {
     <ProductShell
       current="dashboard"
       title="Visao geral do seu dia"
-      subtitle="Tudo o que a Sara organizou para voce, com WhatsApp como centro da captura."
+      subtitle="Tudo o que a Sara organizou para voce, com o chat nativo como centro de captura e execucao."
     >
       <div className="product-grid product-grid--dashboard-v2">
         <article className="glass-panel glass-panel--hero">
           <div className="dashboard-hero">
             <div>
-              <span className="eyebrow">WhatsApp no centro</span>
-              <h2 className="dashboard-hero__title">O painel mostra. O WhatsApp organiza.</h2>
+              <span className="eyebrow">Chat no centro</span>
+              <h2 className="dashboard-hero__title">Voce conversa. A Sara executa.</h2>
               <p>
-                Sua vida pratica chega por mensagem, a Sara estrutura e o dashboard
-                devolve clareza sem excesso de informacao.
+                Tudo entra pelo chat, vira estrutura real e reaparece no painel com menos atrito
+                e mais clareza para o seu dia.
               </p>
               <div className="hero__actions">
-                <Link href="/painel/whatsapp" className="button button--primary">
-                  Vincular WhatsApp
+                <Link href="/painel/chat" className="button button--primary">
+                  Abrir chat
                 </Link>
-                <Link href="/painel/agenda" className="button button--secondary">
-                  Ver agenda de hoje
+                <Link href="/painel/listas" className="button button--secondary">
+                  Ver listas
                 </Link>
               </div>
             </div>
             <div className="dashboard-summary">
               <div className="metric-card">
                 <span>Itens organizados hoje</span>
-                <strong>{data.notes.length + data.remindersFuture.length + data.agendaToday.length}</strong>
+                <strong>{data.tasksOpen.length + data.remindersFuture.length + data.agendaToday.length}</strong>
               </div>
               <div className="metric-card">
-                <span>Lembretes ativos</span>
-                <strong>{data.remindersFuture.length}</strong>
+                <span>Tarefas abertas</span>
+                <strong>{data.tasksOpen.length}</strong>
               </div>
               <div className="metric-card">
-                <span>Compromissos proximos</span>
-                <strong>{data.agendaToday.length}</strong>
+                <span>Listas ativas</span>
+                <strong>{data.lists.length}</strong>
               </div>
             </div>
           </div>
@@ -52,8 +52,8 @@ export function DashboardPage({ data }: DashboardPageProps) {
         <article className="glass-panel">
           <div className="panel-header">
             <div>
-              <h2>Proximos avisos da Sara</h2>
-              <p>Mensagens de orientacao, alerta e acompanhamento.</p>
+              <h2>Ultimas acoes da Sara</h2>
+              <p>Execucoes reais do sistema a partir do chat.</p>
             </div>
           </div>
           <div className="stack-list">
@@ -69,25 +69,23 @@ export function DashboardPage({ data }: DashboardPageProps) {
         <article className="glass-panel">
           <div className="panel-header">
             <div>
-              <h2>Resumo da rotina</h2>
-              <p>Manha, tarde e noite em blocos simples.</p>
+              <h2>Tarefas em foco</h2>
+              <p>O que merece energia primeiro.</p>
             </div>
-            <Link href="/painel/rotina" className="button button--ghost">
-              Abrir rotina
+            <Link href="/painel/tarefas" className="button button--ghost">
+              Abrir tarefas
             </Link>
           </div>
-          <div className="period-grid">
-            {["manha", "tarde", "noite"].map((period) => {
-              const items = data.routines.filter((item) => item.period === period);
-              const label = period === "manha" ? "Manha" : period === "tarde" ? "Tarde" : "Noite";
-
-              return (
-                <div key={period} className="period-card">
-                  <span>{label}</span>
-                  <p>{items.map((item) => item.title).join(", ") || "Sem itens"}</p>
+          <div className="stack-list">
+            {data.tasksOpen.slice(0, 4).map((task) => (
+              <div key={task.id} className="list-row">
+                <div>
+                  <strong>{task.title}</strong>
+                  <p>{task.dueAt ?? "Sem prazo definido"}</p>
                 </div>
-              );
-            })}
+                <span className={`soft-badge soft-badge--${task.priority}`}>{task.priority}</span>
+              </div>
+            ))}
           </div>
         </article>
 
@@ -115,23 +113,21 @@ export function DashboardPage({ data }: DashboardPageProps) {
         <article className="glass-panel">
           <div className="panel-header">
             <div>
-              <h2>Lembretes ativos</h2>
-              <p>Urgencia e previsao em um mesmo bloco.</p>
+              <h2>Listas vivas</h2>
+              <p>Checagens e compras em estrutura simples.</p>
             </div>
-            <Link href="/painel/lembretes" className="button button--ghost">
-              Abrir lembretes
+            <Link href="/painel/listas" className="button button--ghost">
+              Abrir listas
             </Link>
           </div>
           <div className="stack-list">
-            {data.remindersFuture.map((item) => (
+            {data.lists.slice(0, 3).map((item) => (
               <div key={item.id} className="list-row">
                 <div>
                   <strong>{item.title}</strong>
-                  <p>{item.when}</p>
+                  <p>{item.openCount} itens abertos de {item.itemCount}</p>
                 </div>
-                <span className={`soft-badge ${item.urgent ? "soft-badge--urgent" : ""}`}>
-                  {item.urgent ? "urgente" : "ativo"}
-                </span>
+                <span className="soft-badge">lista</span>
               </div>
             ))}
           </div>

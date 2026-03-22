@@ -1,26 +1,21 @@
+import type { PanelData } from "@/lib/sara/types";
 import { ProductShell } from "./app-shell";
 
-const columns = [
-  {
-    title: "Capturado",
-    items: ["Responder cliente no WhatsApp", "Comprar remédio", "Salvar insight do curso"]
-  },
-  {
-    title: "Planejado",
-    items: ["Revisar agenda da semana", "Separar boletos do mês", "Organizar rotina da manhã"]
-  },
-  {
-    title: "Concluído",
-    items: ["Enviar documentos", "Checar compromisso de sexta"]
-  }
-];
+type TasksPageProps = {
+  data: PanelData;
+};
 
-export function TasksPage() {
+export function TasksPage({ data }: TasksPageProps) {
+  const columns = [
+    { title: "Abertas", items: data.tasksOpen, fallback: "Sem prazo definido" },
+    { title: "Concluidas", items: data.tasksDone, fallback: "Concluida" }
+  ];
+
   return (
     <ProductShell
       current="tarefas"
       title="Tarefas"
-      subtitle="Tudo capturado, priorizado e visível sem parecer uma planilha."
+      subtitle="Tudo o que o chat transformou em execucao clara, com prioridade e contexto."
     >
       <div className="product-grid product-grid--columns">
         {columns.map((column) => (
@@ -33,9 +28,9 @@ export function TasksPage() {
             </div>
             <div className="kanban-stack">
               {column.items.map((item) => (
-                <div key={item} className="task-card">
-                  <strong>{item}</strong>
-                  <span>Contexto Sara</span>
+                <div key={item.id} className="task-card">
+                  <strong>{item.title}</strong>
+                  <span>{item.dueAt ?? column.fallback}</span>
                 </div>
               ))}
             </div>

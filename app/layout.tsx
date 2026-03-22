@@ -15,9 +15,9 @@ const display = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Sara | Organização mental via WhatsApp",
+  title: "Sara | Organizacao mental com painel e chat nativo",
   description:
-    "Sara organiza tarefas, lembretes, agenda, rotina, finanças, notas e ideias via WhatsApp com uma experiência clara, calma e confiável."
+    "Sara organiza tarefas, lembretes, agenda, rotina, financas, notas e ideias com um painel claro e um chat nativo que executa em linguagem natural."
 };
 
 export default function RootLayout({

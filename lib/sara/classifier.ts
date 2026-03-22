@@ -39,7 +39,7 @@ export async function classifyMessage(body: string): Promise<InterpretedMessage>
     return {
       classification: "agenda",
       title: text,
-      details: "Evento capturado pelo WhatsApp",
+      details: "Evento capturado pelo chat da Sara",
       startsAt: extractTime(text) ?? new Date(Date.now() + 2 * 60 * 60 * 1000)
     };
   }

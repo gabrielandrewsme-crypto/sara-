@@ -3,15 +3,15 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { PageShell } from "./page-shell";
 
 const howItWorks = [
-  "Você manda uma tarefa, compromisso, lembrete ou ideia no WhatsApp.",
-  "A Sara transforma isso em estrutura: prioridade, contexto, data, lista e acompanhamento.",
-  "Tudo fica organizado para você enxergar o que importa sem sobrecarga."
+  "Voce escreve no chat da Sara o que precisa organizar.",
+  "A Sara interpreta a intencao, transforma em estrutura e executa no sistema.",
+  "Tudo reaparece no painel com prioridade, contexto, lista, rotina ou agenda."
 ];
 
 const audiences = [
-  "Pessoas com TDAH que vivem no improviso e sentem que estão sempre apagando incêndio.",
-  "Quem esquece tarefas simples porque a cabeça já está ocupada demais.",
-  "Profissionais e estudantes que precisam de clareza sem virar reféns de aplicativos complexos."
+  "Pessoas com TDAH que vivem no improviso e sentem que estao sempre apagando incendio.",
+  "Quem esquece tarefas simples porque a cabeca ja esta ocupada demais.",
+  "Profissionais e estudantes que precisam de clareza sem virar refens de ferramentas pesadas."
 ];
 
 const organizationAreas = [
@@ -19,49 +19,50 @@ const organizationAreas = [
   "lembretes",
   "agenda",
   "rotina",
-  "finanças",
+  "listas",
+  "financas",
   "notas",
   "ideias"
 ];
 
 const benefits = [
   {
-    title: "Menos ruído mental",
+    title: "Menos ruido mental",
     description:
-      "Você para de usar a memória como caixa de entrada e ganha espaço para pensar."
+      "Voce para de usar a memoria como caixa de entrada e ganha espaco para pensar."
   },
   {
     title: "Clareza de prioridade",
     description:
-      "A Sara ajuda a separar urgência, rotina e pendência antes que tudo vire peso."
+      "A Sara separa urgencia, rotina e pendencia antes que tudo vire peso."
   },
   {
     title: "Sistema simples de manter",
     description:
-      "A experiência acontece no WhatsApp, no fluxo em que a vida real já acontece."
+      "A experiencia acontece dentro do painel, com um chat nativo que executa sem friccao."
   },
   {
-    title: "Confiança para seguir",
+    title: "Confianca para seguir",
     description:
-      "Em vez de tentar lembrar de tudo, você sabe onde tudo está e o que fazer agora."
+      "Em vez de tentar lembrar de tudo, voce sabe onde tudo esta e o que fazer agora."
   }
 ];
 
 const faqs = [
   {
-    question: "A Sara é um app de produtividade comum?",
+    question: "A Sara e um app de produtividade comum?",
     answer:
-      "Não. A proposta é reduzir fricção mental usando conversa via WhatsApp e uma estrutura visual clara, sem excesso de telas ou complexidade."
+      "Nao. A proposta e reduzir friccao mental com um painel claro e um chat que opera diretamente sobre o sistema."
   },
   {
     question: "Preciso aprender um sistema novo?",
     answer:
-      "Não. A interface foi pensada para ser intuitiva e a operação principal acontece por mensagens, com um painel complementar."
+      "Nao. A interface foi desenhada para ser intuitiva e a operacao principal acontece em linguagem natural."
   },
   {
-    question: "A Sara serve só para tarefas?",
+    question: "A Sara serve so para tarefas?",
     answer:
-      "Não. Ela começa pelas tarefas, mas também organiza agenda, lembretes, rotina, finanças, notas e ideias."
+      "Nao. Ela organiza tarefas, agenda, lembretes, rotina, listas, financas, notas e ideias."
   }
 ];
 
@@ -70,11 +71,11 @@ export function LandingPage() {
     <PageShell current="home">
       <section className="hero">
         <div className="hero__copy">
-          <span className="eyebrow">Organização mental via WhatsApp</span>
-          <h1>TDAH não é bagunça. É falta de sistema.</h1>
+          <span className="eyebrow">Organizacao mental com chat nativo</span>
+          <h1>TDAH nao e bagunca. E falta de sistema.</h1>
           <p className="hero__lead">
-            Sara organiza tarefas, lembretes, agenda, rotina, finanças, notas e ideias
-            via WhatsApp para transformar sobrecarga em clareza prática.
+            Sara organiza tarefas, lembretes, agenda, rotina, financas, notas e ideias
+            dentro de um painel proprio, com um chat nativo para transformar linguagem natural em acao real.
           </p>
           <div className="hero__actions">
             <Button href="/assinatura">Assinar agora</Button>
@@ -83,15 +84,15 @@ export function LandingPage() {
             </Button>
           </div>
           <div className="hero__anchors">
-            <p>“Memória não é lugar de tarefa.”</p>
-            <span>Sistema pensado para leveza, consistência e confiança.</span>
+            <p>"Memoria nao e lugar de tarefa."</p>
+            <span>Sistema pensado para leveza, consistencia e confianca.</span>
           </div>
         </div>
         <div className="hero__visual">
           <div className="showcase-card">
             <div className="showcase-card__top">
               <span>Fluxo mental organizado</span>
-              <small>WhatsApp + painel Sara</small>
+              <small>Chat + painel Sara</small>
             </div>
             <div className="showcase-card__center">
               <div className="signal signal--soft" />
@@ -102,7 +103,7 @@ export function LandingPage() {
             <div className="showcase-card__bottom">
               <div>
                 <strong>Hoje</strong>
-                <span>3 prioridades, 2 lembretes, 1 ideia salva</span>
+                <span>3 prioridades, 2 lembretes, 1 lista atualizada</span>
               </div>
               <div className="status-pill">mente mais leve</div>
             </div>
@@ -113,8 +114,8 @@ export function LandingPage() {
       <section className="content-section">
         <SectionHeading
           eyebrow="Como funciona"
-          title="Uma camada de organização entre sua mente e o caos do dia"
-          description="Você fala com a Sara no WhatsApp e ela transforma o que estava solto em estrutura utilizável."
+          title="Uma camada de organizacao entre sua mente e o caos do dia"
+          description="Voce conversa com a Sara dentro do proprio sistema e ela transforma o que estava solto em estrutura utilizavel."
         />
         <div className="grid grid--three">
           {howItWorks.map((item, index) => (
@@ -128,8 +129,8 @@ export function LandingPage() {
 
       <section className="content-section">
         <SectionHeading
-          eyebrow="Para quem é"
-          title="Feita para quem está cansada de depender da própria memória"
+          eyebrow="Para quem e"
+          title="Feita para quem esta cansada de depender da propria memoria"
           description="A Sara foi desenhada para rotinas intensas, mentes sobrecarregadas e pessoas que precisam de um sistema simples para funcionar."
         />
         <div className="grid grid--three">
@@ -144,8 +145,8 @@ export function LandingPage() {
       <section className="content-section">
         <SectionHeading
           eyebrow="O que a Sara organiza"
-          title="Tudo o que costuma competir pela sua atenção"
-          description="A marca nasce com uma visão completa da vida prática, não apenas como uma lista de tarefas."
+          title="Tudo o que costuma competir pela sua atencao"
+          description="A marca nasce com uma visao completa da vida pratica, nao apenas como uma lista de tarefas."
         />
         <div className="tag-cloud">
           {organizationAreas.map((item) => (
@@ -158,9 +159,9 @@ export function LandingPage() {
 
       <section className="content-section">
         <SectionHeading
-          eyebrow="Benefícios"
-          title="Ganhos emocionais e práticos em uma experiência calma"
-          description="O objetivo não é produzir mais a qualquer custo. É reduzir atrito, culpa e esquecimento."
+          eyebrow="Beneficios"
+          title="Ganhos emocionais e praticos em uma experiencia calma"
+          description="O objetivo nao e produzir mais a qualquer custo. E reduzir atrito, culpa e esquecimento."
         />
         <div className="grid grid--two">
           {benefits.map((item) => (
@@ -174,21 +175,21 @@ export function LandingPage() {
 
       <section className="value-block">
         <div>
-          <span className="eyebrow">Confiança</span>
+          <span className="eyebrow">Confianca</span>
           <h2>Um sistema que respeita a forma como sua mente funciona</h2>
         </div>
         <div className="value-block__stats">
           <article className="panel">
-            <strong>WhatsApp-first</strong>
-            <p>Menos fricção de entrada. Mais aderência na vida real.</p>
+            <strong>Chat-first</strong>
+            <p>Menos friccao de entrada. Mais aderencia na vida real.</p>
           </article>
           <article className="panel">
             <strong>Clareza visual</strong>
-            <p>Design calmo, rotas objetivas e comunicação sem ruído.</p>
+            <p>Design calmo, rotas objetivas e comunicacao sem ruido.</p>
           </article>
           <article className="panel">
-            <strong>Marca com propósito</strong>
-            <p>Não trata sobre desorganização moral. Trata sobre sistema.</p>
+            <strong>Marca com proposito</strong>
+            <p>Nao trata sobre desorganizacao moral. Trata sobre sistema.</p>
           </article>
         </div>
       </section>
@@ -197,7 +198,7 @@ export function LandingPage() {
         <SectionHeading
           eyebrow="FAQ"
           title="Perguntas frequentes"
-          description="As respostas abaixo reforçam o posicionamento e reduzem objeções logo no primeiro contato."
+          description="As respostas abaixo reforcam o posicionamento e reduzem objecoes logo no primeiro contato."
         />
         <div className="faq-list">
           {faqs.map((item) => (
@@ -212,8 +213,8 @@ export function LandingPage() {
       <section className="cta-banner">
         <div>
           <span className="eyebrow">Comece agora</span>
-          <h2>Sua mente não precisa carregar tudo sozinha.</h2>
-          <p>Assine a Sara e transforme memória solta em sistema confiável.</p>
+          <h2>Sua mente nao precisa carregar tudo sozinha.</h2>
+          <p>Assine a Sara e transforme memoria solta em sistema confiavel.</p>
         </div>
         <Button href="/assinatura">Ir para assinatura</Button>
       </section>

@@ -3,14 +3,18 @@ import { eq } from "drizzle-orm";
 import { createPanelSeed } from "@/lib/sara/mock-store";
 import { getDb } from "@/lib/db/client";
 import {
+  actionLogs,
   calendarEvents,
   financeEntries,
   ideas,
+  listItems,
   notes,
   reminders,
   routineBlocks,
   routines,
+  tasks,
   subscriptions,
+  userLists,
   users
 } from "@/lib/db/schema";
 
@@ -198,6 +202,63 @@ export async function bootstrapLocalUser(input: BootstrapInput) {
           cluster: cluster.title.toLowerCase()
         }))
       )
+    );
+  }
+
+  const [existingTask] = await db.select({ id: tasks.id }).from(tasks).where(eq(tasks.userId, userId)).limit(1);
+  if (!existingTask) {
+    await db.insert(tasks).values([
+      ...seed.tasksOpen.map((item) => ({
+        userId,
+        title: item.title,
+        details: item.details ?? null,
+        priority: item.priority,
+        status: "open" as const
+      })),
+      ...seed.tasksDone.map((item) => ({
+        userId,
+        title: item.title,
+        details: item.details ?? null,
+        priority: item.priority,
+        status: "done" as const
+      }))
+    ]);
+  }
+
+  const [existingList] = await db.select({ id: userLists.id }).from(userLists).where(eq(userLists.userId, userId)).limit(1);
+  if (!existingList) {
+    for (const [index, list] of seed.lists.entries()) {
+      const [createdList] = await db
+        .insert(userLists)
+        .values({
+          userId,
+          title: list.title
+        })
+        .returning({ id: userLists.id });
+
+      if (list.items.length) {
+        await db.insert(listItems).values(
+          list.items.map((item, itemIndex) => ({
+            listId: createdList.id,
+            userId,
+            title: item.title,
+            status: item.done ? "done" as const : "open" as const,
+            sortOrder: index * 10 + itemIndex
+          }))
+        );
+      }
+    }
+  }
+
+  const [existingActionLog] = await db.select({ id: actionLogs.id }).from(actionLogs).where(eq(actionLogs.userId, userId)).limit(1);
+  if (!existingActionLog) {
+    await db.insert(actionLogs).values(
+      seed.recentActions.map((item) => ({
+        userId,
+        actionType: item.actionType,
+        entityType: item.entityType,
+        summary: item.summary
+      }))
     );
   }
 

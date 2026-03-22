@@ -27,6 +27,9 @@ export const subscriptionStatusEnum = pgEnum("subscription_status", [
   "expired"
 ]);
 export const providerEnum = pgEnum("provider_name", ["cakto", "evolution", "meta", "manual"]);
+export const conversationStatusEnum = pgEnum("conversation_status", ["active", "archived"]);
+export const conversationRoleEnum = pgEnum("conversation_role", ["user", "assistant", "system"]);
+export const listItemStatusEnum = pgEnum("list_item_status", ["open", "done"]);
 export const whatsappStatusEnum = pgEnum("whatsapp_status", ["pending", "linked", "error", "disconnected"]);
 export const inboundMessageTypeEnum = pgEnum("inbound_message_type", [
   "text",
@@ -95,6 +98,94 @@ export const subscriptions = pgTable(
     uniqueIndex("subscriptions_provider_subscription_unique").on(table.providerSubscriptionId),
     index("subscriptions_user_idx").on(table.userId)
   ]
+);
+
+export const conversations = pgTable(
+  "conversations",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    title: varchar("title", { length: 160 }).default("Conversa principal").notNull(),
+    status: conversationStatusEnum("status").default("active").notNull(),
+    lastMessageAt: timestamp("last_message_at", { withTimezone: true }).defaultNow().notNull(),
+    ...timestamps
+  },
+  (table) => [index("conversations_user_idx").on(table.userId)]
+);
+
+export const messages = pgTable(
+  "messages",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    conversationId: uuid("conversation_id")
+      .notNull()
+      .references(() => conversations.id, { onDelete: "cascade" }),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    role: conversationRoleEnum("role").notNull(),
+    content: text("content").notNull(),
+    metadata: jsonb("metadata"),
+    ...timestamps
+  },
+  (table) => [index("messages_conversation_idx").on(table.conversationId)]
+);
+
+export const userLists = pgTable(
+  "lists",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    title: varchar("title", { length: 220 }).notNull(),
+    archivedAt: timestamp("archived_at", { withTimezone: true }),
+    ...timestamps
+  },
+  (table) => [index("lists_user_idx").on(table.userId)]
+);
+
+export const listItems = pgTable(
+  "list_items",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    listId: uuid("list_id")
+      .notNull()
+      .references(() => userLists.id, { onDelete: "cascade" }),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    title: varchar("title", { length: 220 }).notNull(),
+    status: listItemStatusEnum("status").default("open").notNull(),
+    sortOrder: integer("sort_order").default(0).notNull(),
+    ...timestamps
+  },
+  (table) => [index("list_items_list_idx").on(table.listId)]
+);
+
+export const actionLogs = pgTable(
+  "action_logs",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    conversationId: uuid("conversation_id").references(() => conversations.id, {
+      onDelete: "set null"
+    }),
+    messageId: uuid("message_id").references(() => messages.id, {
+      onDelete: "set null"
+    }),
+    actionType: varchar("action_type", { length: 40 }).notNull(),
+    entityType: varchar("entity_type", { length: 80 }).notNull(),
+    entityId: varchar("entity_id", { length: 80 }),
+    summary: text("summary").notNull(),
+    payload: jsonb("payload"),
+    ...timestamps
+  },
+  (table) => [index("action_logs_user_idx").on(table.userId)]
 );
 
 export const whatsappAccounts = pgTable(

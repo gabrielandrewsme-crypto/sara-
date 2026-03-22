@@ -1,6 +1,16 @@
 export type NoticeTone = "gold" | "blue" | "violet" | "slate" | "info";
-export type MessageClassification = "task" | "reminder" | "agenda" | "finance" | "note" | "idea" | "unknown";
+export type MessageClassification = "task" | "reminder" | "agenda" | "finance" | "note" | "idea" | "list" | "routine" | "unknown";
 export type FinanceEntryType = "income" | "expense";
+export type TaskPriority = "low" | "normal" | "high";
+export type ChatRole = "user" | "assistant" | "system";
+export type ActionType =
+  | "create"
+  | "update"
+  | "complete"
+  | "query"
+  | "reorganize"
+  | "delete"
+  | "suggest";
 
 export type DashboardAlert = {
   title: string;
@@ -52,10 +62,49 @@ export type IdeaCluster = {
   notes: string[];
 };
 
-export type WhatsAppState = {
-  phoneNumber: string;
-  connected: boolean;
-  connectUrl?: string | null;
+export type TaskItem = {
+  id: string;
+  title: string;
+  details?: string;
+  priority: TaskPriority;
+  status: "open" | "done" | "archived";
+  dueAt?: string | null;
+};
+
+export type ListItem = {
+  id: string;
+  title: string;
+  done: boolean;
+};
+
+export type ListSummary = {
+  id: string;
+  title: string;
+  itemCount: number;
+  openCount: number;
+  items: ListItem[];
+};
+
+export type ActionLogItem = {
+  id: string;
+  actionType: ActionType;
+  entityType: string;
+  summary: string;
+  createdAt: string;
+};
+
+export type ChatMessage = {
+  id: string;
+  role: ChatRole;
+  content: string;
+  createdAt: string;
+};
+
+export type ChatState = {
+  conversationId: string;
+  messages: ChatMessage[];
+  recentActions: ActionLogItem[];
+  suggestedPrompts: string[];
 };
 
 export type AccountStatus = "active" | "past_due" | "canceled" | "blocked";
@@ -66,6 +115,8 @@ export type PanelData = {
     email: string;
   };
   alerts: DashboardAlert[];
+  tasksOpen: TaskItem[];
+  tasksDone: TaskItem[];
   routines: RoutineItem[];
   remindersFuture: ReminderItem[];
   remindersDone: ReminderItem[];
@@ -74,7 +125,8 @@ export type PanelData = {
   finance: FinanceSummary;
   notes: NoteItem[];
   ideas: IdeaCluster[];
-  whatsapp: WhatsAppState;
+  lists: ListSummary[];
+  recentActions: ActionLogItem[];
   account: {
     status: AccountStatus;
     createdAt: string;
@@ -117,15 +169,6 @@ export type LinkedSubscription = {
   status: "pending" | "active" | "past_due" | "canceled" | "expired";
 };
 
-export type InboundMessageInput = {
-  userId: string;
-  whatsappAccountId?: string | null;
-  providerMessageId: string;
-  messageType: "text" | "audio" | "image" | "document" | "system";
-  body?: string | null;
-  rawPayload?: unknown;
-};
-
 export type InterpretedMessage = {
   classification: MessageClassification;
   title: string;
@@ -136,4 +179,17 @@ export type InterpretedMessage = {
   amount?: number;
   financeType?: FinanceEntryType;
   cluster?: string;
+  priority?: TaskPriority;
+  period?: RoutinePeriod;
+  listItems?: string[];
+  targetTitle?: string;
+  newTitle?: string;
+};
+
+export type ChatExecutionResult = {
+  reply: string;
+  actionType: ActionType;
+  entityType: string;
+  entityId?: string;
+  summary: string;
 };

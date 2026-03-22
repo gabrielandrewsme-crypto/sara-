@@ -2,9 +2,9 @@ import { Button } from "@/components/ui/button";
 import { PageShell } from "./page-shell";
 
 const steps = [
-  "Sua assinatura foi concluída com sucesso.",
+  "Sua assinatura foi concluida com sucesso.",
   "Acesse a Sara usando o mesmo email informado na compra.",
-  "Dentro do painel, você fará a vinculação do seu número de WhatsApp."
+  "Dentro do painel, use o chat da Sara para criar suas primeiras organizacoes."
 ];
 
 export function PostPurchasePage() {
@@ -12,10 +12,10 @@ export function PostPurchasePage() {
     <PageShell current="pos-compra">
       <section className="confirmation-card">
         <div className="confirmation-card__badge">Assinatura confirmada</div>
-        <h1>Seu acesso à Sara está liberado.</h1>
+        <h1>Seu acesso a Sara esta liberado.</h1>
         <p>
-          O próximo passo é simples: entrar com o email da compra e concluir a conexão
-          com seu WhatsApp dentro do painel.
+          O proximo passo e simples: entrar com o email da compra e usar o chat nativo
+          para transformar sua rotina em estrutura real dentro do painel.
         </p>
         <div className="grid grid--three">
           {steps.map((step, index) => (

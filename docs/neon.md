@@ -1,6 +1,6 @@
 # Neon Setup
 
-Este projeto ja esta preparado para usar Neon com Drizzle. O modo mock continua disponivel para desenvolvimento visual, mas o fluxo real do painel, auth e webhooks passa a usar Postgres quando `MOCK_BACKEND=false`.
+Este projeto esta preparado para usar Neon com Drizzle. O modo mock continua disponivel para desenvolvimento visual, mas o fluxo real do painel, auth, chat e webhooks passa a usar Postgres quando `MOCK_BACKEND=false`.
 
 ## 1. Criar banco na Neon
 
@@ -22,7 +22,6 @@ APP_URL=http://localhost:3000
 DATABASE_URL=postgresql://USER:PASSWORD@HOST/neondb?sslmode=require
 MOCK_BACKEND=false
 AUTH_COOKIE_NAME=sara_session
-SARA_WHATSAPP_URL=https://wa.me/5500000000000
 ```
 
 ## 3. Instalar dependencias
@@ -62,13 +61,14 @@ Resposta esperada:
 
 Depois da conexao:
 
-1. Dispare o webhook da Cakto para criar/ativar usuario e assinatura.
+1. Dispare o webhook da Cakto para criar ou ativar o usuario.
 2. Faca login com o email da compra.
-3. Vincule o WhatsApp em `/painel/whatsapp`.
-4. Envie mensagens para a Sara e confirme a atualizacao no painel.
+3. Abra o painel e use o chat da Sara.
+4. Crie tarefas, lembretes e listas pelo chat.
+5. Confirme a atualizacao imediata no painel.
 
 ## Observacoes
 
 - Enquanto `MOCK_BACKEND=true`, o projeto nao usa Neon mesmo com `DATABASE_URL` preenchida.
-- O client atual usa `@neondatabase/serverless` via HTTP, que combina bem com rotas serverless e App Router.
-- A adaptacao para Meta API no futuro continua isolada na camada de provider do WhatsApp, sem acoplar o dashboard ao Evolution.
+- O client atual usa `@neondatabase/serverless`, que combina bem com rotas serverless e App Router.
+- A camada de chat grava conversas e logs no banco, o que facilita rastreabilidade e evolucao futura do motor de IA.

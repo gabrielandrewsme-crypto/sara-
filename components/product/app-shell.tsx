@@ -47,7 +47,7 @@ export function ProductShell({
     <div className="product-shell">
       <aside className="product-sidebar">
         <BrandLogo />
-        <nav className="product-nav" aria-label="Navegação do app">
+        <nav className="product-nav" aria-label="Navegacao do app">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -60,7 +60,7 @@ export function ProductShell({
           ))}
         </nav>
         <div className="product-sidebar__footer">
-          <p>Sara organiza sua mente em modulos simples e conectados.</p>
+          <p>Organizacao clara, calor visual e execucao direta pelo chat.</p>
           <Link href="/" className="button button--ghost">
             Voltar ao site
           </Link>
@@ -75,8 +75,8 @@ export function ProductShell({
             <p className="product-subtitle">{subtitle}</p>
           </div>
           <div className="product-topbar__actions">
-            <div className="product-chip">Hoje 3 prioridades</div>
-            <div className="product-chip">Chat nativo ativo</div>
+            <div className="product-chip">Hoje em foco</div>
+            <div className="product-chip">Chat em tempo real</div>
             <button type="button" className="product-avatar">
               SO
             </button>
